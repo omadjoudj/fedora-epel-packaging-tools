@@ -1,2 +1,2 @@
-# dockerfiles
-Some Dockerfiles I use for testing
+# packaging-tools
+Some tools I use for packaging and testing
