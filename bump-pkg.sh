@@ -5,8 +5,8 @@
 #
 
 ver_num="$1"
-if [ -z "$ver_num" ] ; then
-    echo "ERROR: Version number not provided"
+if [ "$#" -ne 2  ] ; then
+    echo "ERROR: Version number and/or RHBZ # not provided"
     exit 1
 else
     klist | grep -q 'FEDORAPROJECT.ORG' 
@@ -16,7 +16,7 @@ else
     else
         # Assume running from dist-git
         spec_name=$( basename $PWD.spec )
-        changelog_msg="Update to $ver_num"
+        changelog_msg="Update to $ver_num (rhbz #${2})"
         rpmdev-bumpspec -n $ver_num -c "$changelog_msg" $spec_name  &&\
         tarball_name=$( basename `spectool -l $spec_name | grep Source0 | awk '{print $2}' `)  &&\
         spectool -g $spec_name &&\
