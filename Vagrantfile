@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
     systemctl enable docker
 
     #User creatation and repos setup
-    useradd -G mock,docker athmane
+    useradd -G mock,docker,wheel athmane
     su - athmane sh -c "curl -s https://src.fedoraproject.org/user/athmane/projects | grep -o '>rpms/.*<' | tr -d '<>' | tee ~athmane/pkg_list"
 
   SHELL
