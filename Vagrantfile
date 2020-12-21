@@ -43,6 +43,7 @@ Vagrant.configure("2") do |config|
     #User creatation and repos setup
     useradd -G mock,docker,wheel athmane
     su - athmane sh -c "curl -s https://src.fedoraproject.org/user/athmane/projects | grep -o '>rpms/.*<' | tr -d '<>' | tee ~athmane/pkg_list"
+    echo 'athmane ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/athmane-nopasswd
 
   SHELL
 end
