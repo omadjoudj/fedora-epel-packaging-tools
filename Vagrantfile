@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     # Prepare the VM
     dnf -y update
-    dnf -y install fedora-packager fedora-review
+    dnf -y install fedora-packager fedora-review byobu vim-enhanced git
     dnf install -y @c-development @development-tools @rpm-development-tools
 
     # Docker installation
@@ -40,9 +40,12 @@ Vagrant.configure("2") do |config|
     systemctl start docker
     systemctl enable docker
 
-    #User creatation and repos setup
+    # User creatation and repos setup
+    #TODO: Shared the folder containing the ssh keys and clone the repos
     useradd -G mock,docker,wheel athmane
     su - athmane sh -c "curl -s https://src.fedoraproject.org/user/athmane/projects | grep -o '>rpms/.*<' | tr -d '<>' | tee ~athmane/pkg_list"
+    su - athmane sh -c "curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    su - athmane sh -c "curl -o ~/.vimrc https://raw.githubusercontent.com/omadjoudj/dotfiles/master/.vimrc"
     echo 'athmane ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/athmane-nopasswd
 
   SHELL
