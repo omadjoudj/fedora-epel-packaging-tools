@@ -25,6 +25,10 @@ Vagrant.configure("2") do |config|
   #   # Customize the amount of memory on the VM:
      vb.memory = "4000"
   end
+  config.vm.provider "libvirt" do |kvm|
+     kvm.memory = "4000"
+     kvm.cpus = "2"
+  end
   config.vm.provision "shell", inline: <<-SHELL
     # Prepare the VM
     dnf -y update
@@ -42,7 +46,8 @@ Vagrant.configure("2") do |config|
 
     # User creatation and repos setup
     #TODO: Shared the folder containing the ssh keys and clone the repos
-    useradd -G mock,docker,wheel athmane
+    useradd -m athmane
+    usermod -G mock,docker,wheel athmane
     su - athmane sh -c "curl -s https://src.fedoraproject.org/user/athmane/projects | grep -o '>rpms/.*<' | tr -d '<>' | tee ~athmane/pkg_list"
     su - athmane sh -c "curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
     su - athmane sh -c "curl -o ~/.vimrc https://raw.githubusercontent.com/omadjoudj/dotfiles/master/.vimrc"
