@@ -48,10 +48,11 @@ Vagrant.configure("2") do |config|
     #TODO: Shared the folder containing the ssh keys and clone the repos
     useradd -m athmane
     usermod -G mock,docker,wheel athmane
-    su - athmane sh -c "curl -s https://src.fedoraproject.org/user/athmane/projects | grep -o '>rpms/.*<' | tr -d '<>' | tee ~athmane/pkg_list"
-    su - athmane sh -c "curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-    su - athmane sh -c "curl -o ~/.vimrc https://raw.githubusercontent.com/omadjoudj/dotfiles/master/.vimrc"
+    su - athmane sh -c "curl -s  -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+    su - athmane sh -c "curl -s -o ~/.vimrc https://raw.githubusercontent.com/omadjoudj/dotfiles/master/.vimrc"
     echo 'athmane ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/athmane-nopasswd
-
+    su - athmane sh -c "echo 'PATH=$PATH:/vagrant/' >> /home/athmane/.bashrc"
+    #su - athmane sh -c "curl -s https://src.fedoraproject.org/user/athmane/projects | grep -o '>rpms/.*<' | tr -d '<>' | tee ~athmane/pkg_list"
+    #su - athmane sh -c 'curl -s \'https://src.fedoraproject.org//api/0/projects?username=athmane&short=1\' | grep fullname | cut -d: -f2 | tr -d \'", \' | tee ~athmane/pkg_list'
   SHELL
 end
