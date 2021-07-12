@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.provider "libvirt" do |kvm|
      kvm.memory = "4000"
-     kvm.cpus = "2"
+     kvm.cpus = "1"
   end
   config.vm.provision "shell", inline: <<-SHELL
     # Prepare the VM
