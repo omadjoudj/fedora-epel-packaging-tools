@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     # Prepare the VM
     dnf -y update
-    dnf -y install fedora-packager fedora-review byobu vim-enhanced git
+    dnf -y install fedora-packager fedora-review byobu vim-enhanced git bash-completion
     dnf install -y @c-development @development-tools @rpm-development-tools
 
     # Docker installation
