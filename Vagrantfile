@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "fedora/34-cloud-base"
+  config.vm.box = "fedora/37-cloud-base"
 #  config.vm.box_version = "33.20201019.0"
 
   # config.vm.box_check_update = false
@@ -36,18 +36,18 @@ Vagrant.configure("2") do |config|
     dnf install -y @c-development @development-tools @rpm-development-tools
 
     # Docker installation
-    dnf -y install dnf-plugins-core
-    dnf config-manager \
-        --add-repo \
-        https://download.docker.com/linux/fedora/docker-ce.repo
-    dnf install -y docker-ce docker-ce-cli containerd.io
-    systemctl start docker
-    systemctl enable docker
+    #dnf -y install dnf-plugins-core
+    #dnf config-manager \
+    #    --add-repo \
+    #    https://download.docker.com/linux/fedora/docker-ce.repo
+    #dnf install -y docker-ce docker-ce-cli containerd.io
+    #systemctl start docker
+    #systemctl enable docker
 
     # User creatation and repos setup
     #TODO: Shared the folder containing the ssh keys and clone the repos
     useradd -m athmane
-    usermod -G mock,docker,wheel athmane
+    usermod -G mock,wheel athmane
     su - athmane sh -c "curl -s  -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
     su - athmane sh -c "curl -s -o ~/.vimrc https://raw.githubusercontent.com/omadjoudj/dotfiles/master/.vimrc"
     echo 'athmane ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/athmane-nopasswd
