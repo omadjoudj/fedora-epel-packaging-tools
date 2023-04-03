@@ -48,6 +48,8 @@ Vagrant.configure("2") do |config|
     #TODO: Shared the folder containing the ssh keys and clone the repos
     useradd -m athmane
     usermod -G mock,wheel athmane
+    su - athmane sh -c "git config --global user.name 'Othman Madjoudj'"
+    su - athmane sh -c "git config --global user.email 'athmane@fedoraproject.org'"
     su - athmane sh -c "curl -s -o ~/.vimrc https://raw.githubusercontent.com/omadjoudj/dotfiles/master/.vimrc"
     su - athmane sh -c "mkdir -p ~/.vim/pack/plugins/start/"
     su - athmane sh -c "cd ~/.vim/pack/plugins/start/ && git clone https://github.com/tpope/vim-fugitive"
