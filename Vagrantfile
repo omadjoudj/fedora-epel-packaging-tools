@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
     su - athmane sh -c "mkdir -p ~/.vim/pack/plugins/start/"
     su - athmane sh -c "cd ~/.vim/pack/plugins/start/ && git clone https://github.com/tpope/vim-fugitive"
     su - athmane sh -c "cd ~/.vim/pack/plugins/start/ && git clone https://github.com/davidhalter/jedi-vim"
-    su - athmane sh -c "cd ~/.vim/pack/plugins/start/ && git clone https://github.com/bling/vim-bufferline"
+    su - athmane sh -c "cd ~/.vim/pack/plugins/start/ && git clone https://github.com/vim-airline/vim-airline"
     su - athmane sh -c "cd ~/.vim/pack/plugins/start/ && git clone https://github.com/tomasiser/vim-code-dark"
     su - athmane sh -c "cd ~/.vim/pack/plugins/start/ && git clone https://github.com/omadjoudj/pyflakes-vim"
 
